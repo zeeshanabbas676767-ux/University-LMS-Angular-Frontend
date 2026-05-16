@@ -1,0 +1,71 @@
+<style>
+  label { color: white; }
+  .page-wrapper { padding: 30px; background-color: #0d0d0d; min-height: 100vh; }
+  .section-title { color: white; font-size: 1.3rem; font-weight: 600; margin-bottom: 16px; }
+  .course-card {
+    background-color: #1a1a2e;
+    border: 1px solid #2a2a4a;
+    border-radius: 10px;
+    padding: 20px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .course-card .title { font-size: 1rem; font-weight: 600; }
+  .course-card .meta { font-size: 0.85rem; color: #aaa; margin-top: 4px; }
+  .course-card .teacher { font-size: 0.85rem; color: #0dfde9; margin-top: 4px; }
+  .badge-enrolled {
+    background-color: #198754;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+  }
+</style>
+
+<div class="page-wrapper">
+  <h3 style="text-align:center; color:white;">Courses</h3>
+
+  <!-- Enrolled Courses -->
+  <!-- <div class="mb-5">
+    <div class="section-title">✅ My Enrolled Courses ({{ enrolledCourses.length }})</div>
+
+    <div *ngIf="enrolledCourses.length === 0" style="color:#aaa;">
+      You have not enrolled in any course yet.
+    </div>
+
+    <div class="course-card" *ngFor="let e of enrolledCourses">
+      <div>
+        <div class="title">{{ e.course?.title }}</div>
+        <div class="meta">{{ e.course?.description }}</div>
+      </div>
+      <div class="d-flex align-items-center gap-3">
+        <span class="badge-enrolled">Enrolled</span>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- All Available Courses -->
+  <div class="row">
+    <div class="section-title">📚 All Available Courses</div>
+
+    <div class="col-md-4 me-3 course-card" *ngFor="let c of allCourses">
+      <div>
+        <div class="title">Course: {{ c.title }}</div>
+        <div class="meta">Description: {{ c.description }}</div>
+        <div class="teacher">Faculty: {{c.teacher?.fullName}}</div>
+      </div>
+      <div>
+        <span *ngIf="isEnrolled(c.id)" class="badge-enrolled">Enrolled</span>
+        <button *ngIf="!isEnrolled(c.id)"
+          class="btn btn-outline-primary btn-sm"
+          style="color:white; font-weight:600"
+          (click)="enroll(c.id)">
+          Enroll
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

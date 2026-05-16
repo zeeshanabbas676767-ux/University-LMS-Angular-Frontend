@@ -1,0 +1,132 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+
+    <a class="navbar-brand" *ngIf="!isAdminLoggedIn" routerLink="/admin/login">LMS University | Admin</a>
+    <a class="navbar-brand" *ngIf="isAdminLoggedIn" routerLink="/admin/dashboard">LMS University | Admin</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+      data-bs-target="#navbarNav" aria-controls="navbarNav"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+
+        <!-- Not logged in → show Login & Register -->
+        <ng-container *ngIf="!isAdminLoggedIn">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/admin/login" routerLinkActive="active">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/admin/register" routerLinkActive="active">Register</a>
+          </li>
+        </ng-container>
+
+        <!-- Logged in → show all admin links -->
+        <ng-container *ngIf="isAdminLoggedIn">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/student/login" routerLinkActive="active">Student</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/teacher/login" routerLinkActive="active">Teacher</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/admin/dashboard" routerLinkActive="active">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/admin/enrollment" routerLinkActive="active">Enrollment</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/admin/courses" routerLinkActive="active">Courses</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/admin/reports" routerLinkActive="active">Reports</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/admin/system-settings" routerLinkActive="active">System Settings</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/admin/users" routerLinkActive="active">Users</a>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-link nav-link" style="color: red;" (click)="logout()">Logout</button>
+          </li>
+        </ng-container>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+
+
+<!-- 
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark"> 
+  <div class="container-fluid">
+     <a class="navbar-brand" *ngIf="!isAdminLoggedIn" routerLink="/admin/login">LMS University | Admin</a>
+    <a class="navbar-brand" *ngIf="isAdminLoggedIn" routerLink="/admin/dashboard">LMS University | Admin</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <strong *ngIf="isAdminLoggedIn" style="display: flex;">
+<li class="nav-item">
+  <a class="nav-link" *ngIf="isStudentLoggedIn" routerLink="/student/dashboard">Student</a>
+  <a class="nav-link" *ngIf="!isStudentLoggedIn"  routerLink="/student/login">Student</a>
+</li>
+
+<li class="nav-item">
+  <a class="nav-link" *ngIf="isTeacherLoggedIn" routerLink="/teacher/dashboard">Teacher</a>
+  <a class="nav-link" *ngIf="!isTeacherLoggedIn" routerLink="/teacher/login">Teacher</a>
+</li>
+        </strong>
+        
+	<strong *ngIf="!isAdminLoggedIn" style="display: flex;">
+	<li class="nav-item">
+		  <a class="nav-link" routerLink="/admin/login">Login</a>
+		</li>
+<li class="nav-item">
+		  <a class="nav-link" routerLink="/admin/register">Register</a>
+</li>
+</strong>
+
+       <strong *ngIf="isAdminLoggedIn" style="display: flex;">
+         <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/admin/dashboard">Dashboard</a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link" routerLink="/admin/enrollment">Enrollment</a>
+        </li>
+       
+
+        
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/admin/courses">Courses</a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/admin/reports">Reports</a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link" routerLink="/admin/system-settings">System Settings</a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/admin/users">Users</a>
+        </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/admin/profile">Profile</a>
+          </li>
+        <li class="nav-item">
+		  <button class="btn btn-link nav-link" style="color: red;" (click)="logout()">Logout</button>	
+		</li>
+        </strong>
+      </ul>
+    </div>
+  </div>
+  
+</nav> -->

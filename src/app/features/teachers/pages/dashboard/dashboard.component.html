@@ -1,0 +1,99 @@
+
+    
+<style>
+  .dashboard-wrapper {
+    padding: 30px;
+    background-color: #0d0d0d;
+    min-height: 100vh;
+    color: white;
+  }
+
+  .welcome {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 30px;
+    color: #ccc;
+  }
+
+  .welcome span {
+    color: #0d6efd;
+  }
+
+  .stat-card {
+    background-color: #1a1a2e;
+    border-radius: 12px;
+    padding: 30px 20px;
+    text-align: center;
+    border: 1px solid #2a2a4a;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  }
+
+  .stat-card .icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+  }
+
+  .stat-card .count {
+    font-size: 2.8rem;
+    font-weight: 700;
+  }
+
+  .stat-card .label {
+    font-size: 1rem;
+    color: #aaa;
+    margin-top: 6px;
+  }
+
+  .courses-color  { border-top: 4px solid #0d6efd; }
+  .courses-color .count  { color: #0d6efd; }
+
+  .assign-color   { border-top: 4px solid #dc3545; }
+  .assign-color .count   { color: #dc3545; }
+
+  .lecture-color  { border-top: 4px solid #198754; }
+  .lecture-color .count  { color: #198754; }
+</style>
+<h2 style="text-align: center;">Teacher Dashboard</h2>
+
+<div class="dashboard-wrapper">
+
+  <div class="welcome">
+    Welcome back, <span>{{ teacherName }}</span> 👋
+  </div>
+
+  <div class="row g-4">
+
+    <!-- Total Courses -->
+    <div class="col-md-4">
+      <div class="stat-card courses-color">
+        <div class="icon">📚</div>
+        <div class="count">{{ totalCourses }}</div>
+        <div class="label">Total Courses</div>
+      </div>
+    </div>
+
+    <!-- Total Assignments -->
+    <div class="col-md-4">
+      <div class="stat-card assign-color">
+        <div class="icon">📝</div>
+        <div class="count">{{ totalAssignments }}</div>
+        <div class="label">Total Assignments</div>
+      </div>
+    </div>
+
+    <!-- Total Lectures -->
+    <div class="col-md-4">
+      <div class="stat-card lecture-color">
+        <div class="icon">🎬</div>
+        <div class="count">{{ totalLectures }}</div>
+        <div class="label">Total Lectures</div>
+      </div>
+    </div>
+
+  </div>
+</div>

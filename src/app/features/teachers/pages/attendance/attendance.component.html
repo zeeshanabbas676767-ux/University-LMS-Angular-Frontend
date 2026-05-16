@@ -1,0 +1,100 @@
+<style>
+  .page-wrapper { padding:30px; background-color:#0d0d0d; min-height:100vh; color:white; }
+  .badge-present { background:#198754; color:white; padding:3px 10px;
+                   border-radius:20px; font-size:0.78rem; }
+  .badge-absent  { background:#dc3545; color:white; padding:3px 10px;
+                   border-radius:20px; font-size:0.78rem; }
+  .clickable     { cursor:pointer; }
+  .clickable:hover td { background-color:#1a1a2e !important; }
+</style>
+
+<div class="page-wrapper">
+
+  <!-- LECTURE SUMMARY VIEW -->
+  <div *ngIf="!selectedLecture">
+    <h3 style="text-align:center;">Attendance Overview</h3>
+    <p style="color:#aaa; text-align:center;">
+      Click any lecture to see per-student attendance
+    </p>
+
+    <div class="container-fluid mt-4" style="overflow:auto;">
+      <table class="table table-dark">
+        <thead>
+          <tr>
+            <th>Lecture</th>
+            <th>Course</th>
+            <th>Present</th>
+            <th>Total Enrolled</th>
+            <th>Rate</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let l of lectures"
+              class="clickable" (click)="viewDetail(l)">
+            <td>{{ l.lectureTitle }}</td>
+            <td>{{ l.courseTitle }}</td>
+            <td style="color:#198754; font-weight:600;">{{ l.totalPresent }}</td>
+            <td>{{ l.totalStudents }}</td>
+            <td>
+              <span *ngIf="l.totalStudents > 0">
+                {{ ((l.totalPresent / l.totalStudents) * 100) | number:'1.0-0' }}%
+              </span>
+              <span *ngIf="l.totalStudents === 0" style="color:#aaa;">N/A</span>
+            </td>
+          </tr>
+          <tr *ngIf="lectures.length === 0">
+            <td colspan="5" style="text-align:center; color:#aaa;">
+              No lectures found.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- PER-STUDENT DETAIL VIEW -->
+  <div *ngIf="selectedLecture">
+    <div class="d-flex align-items-center gap-3 mb-4">
+      <button class="btn btn-outline-secondary"
+              style="color:white;"
+              (click)="back()">
+        ← Back
+      </button>
+      <div>
+        <h5 style="margin:0;">{{ selectedLecture.lectureTitle }}</h5>
+        <small style="color:#aaa;">{{ selectedLecture.courseTitle }}</small>
+      </div>
+    </div>
+
+    <div class="container-fluid" style="overflow:auto;">
+      <table class="table table-dark">
+        <thead>
+          <tr>
+            <th>Student</th>
+            <th>Status</th>
+            <th>Date Watched</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let s of lectureDetail">
+            <td>{{ s.studentName }}</td>
+            <td>
+              <span [class]="s.isPresent ? 'badge-present' : 'badge-absent'">
+                {{ s.isPresent ? '✅ Present' : '❌ Absent' }}
+              </span>
+            </td>
+            <td>
+              {{ s.date ? (s.date | date:'dd MMM yyyy, hh:mm a') : '—' }}
+            </td>
+          </tr>
+          <tr *ngIf="lectureDetail.length === 0">
+            <td colspan="3" style="text-align:center; color:#aaa;">
+              No students enrolled yet.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,67 @@
+<!-- <div class="container mt-4">
+
+  <h3>Reports Dashboard</h3>
+
+ 
+  <div class="row mb-4">
+
+    <div class="col-md-3">
+      <div class="card bg-primary text-white p-3">
+        <h5>Total Students</h5>
+        <h2>{{ totalStudents }}</h2>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card bg-success text-white p-3">
+        <h5>Total Courses</h5>
+        <h2>{{ totalCourses }}</h2>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card bg-warning text-white p-3">
+        <h5>Enrollments</h5>
+        <h2>{{ totalEnrollments }}</h2>
+      </div>
+    </div>
+
+  </div>
+
+ 
+  <div class="card p-3 mb-3">
+    <h5>Filter by Course</h5>
+
+    <select class="form-control" [(ngModel)]="selectedCourseId" (change)="filterReports()">
+      <option value="">All Courses</option>
+      <option *ngFor="let c of courses" [value]="c.id">
+        {{ c.title }}
+      </option>
+    </select>
+  </div>
+
+ 
+  <div class="card p-3">
+    <h5>Enrollment Report</h5>
+
+    <table class="table table-bordered mt-3">
+      <thead>
+        <tr>
+          <th>Student</th>
+          <th>Course</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let r of filteredReports">
+          <td>{{ r.studentName }}</td>
+          <td>{{ r.courseTitle }}</td>
+          <td>{{ r.date }}</td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+
+</div> -->

@@ -1,0 +1,166 @@
+<style>
+  button.btn:disabled {
+  cursor: not-allowed !important;
+  pointer-events: all;
+}
+</style>
+
+<div class="card mt-5">
+<div class="card-body mt-5">
+<div class="container mt-5" style="max-width: 400px;">
+
+  <h3 class="text-center mb-3">Admin Login</h3>
+  <div *ngIf="error" class="alert alert-danger text-center">
+  {{ error }}
+</div>
+  <form (ngSubmit)="login()" #loginForm="ngForm">
+    <!-- Email -->
+    <div class="mb-3">
+      <label>Email</label>
+      <input
+        type="email"
+        style="font-size: medium;"
+        class="form-control"
+        name="email"
+       [(ngModel)]="email"
+        required
+      />
+    </div>
+
+         <!--  Role Id  -->
+            <div class="mb-3">
+      <label class="form-label">Role Id (1 for Admin)</label>
+      <input
+        type="number"
+        class="form-control"
+        name="roleId"
+          placeholder="Enter Your Role Id" style="font-size: medium;"
+        [(ngModel)]="roleId"
+        required
+      />
+    </div>
+    
+    <!-- Password -->
+    <div class="mb-3">
+      <label>Password</label>
+      <div class="input-group">
+        <input style="font-size: medium;"
+          [type]="showPassword ? 'text' : 'password'"
+          class="form-control"
+          name="password"
+          [(ngModel)]="password"
+          required
+        />  
+       <button
+          type="button"
+          class="btn btn-sm bg-dark text-white" 
+           title="Show/Hide" 
+          (click)="togglePassword()"
+        >
+           <i class="fa fa-eye"></i> 
+        </button>
+      </div>
+    </div>
+    
+    <button
+      type="submit"
+      class="btn btn-success w-100"
+       [disabled]="loginForm.invalid || roleId <= 0 || roleId >= 2 || !email || !password || !roleId"
+    
+    >
+      Login
+    </button>
+        <a routerLink="/admin/register" class="btn btn-link text-primary mt-2 d-block">
+           Don’t have an account? Register</a>
+  </form>
+
+  <!-- <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+    {{ errorMessage }}
+  </div> -->
+</div>
+</div>
+</div>
+
+
+<!-- <h2>Login Admin</h2>
+
+<input [(ngModel)]="email" placeholder="Email">
+<br><br>
+
+<input [(ngModel)]="password" type="password" placeholder="Password">
+<br><br>
+
+<button (click)="login()">Login</button>
+
+ -->
+
+
+
+
+
+<!-- 
+
+<style>
+  button.btn:disabled {
+  cursor: not-allowed !important;
+  pointer-events: all;
+}
+</style>
+
+<div class="card mt-5">
+<div class="card-body mt-5">
+<div class="container mt-5" style="max-width: 400px;">
+
+  <h3 class="text-center mb-3">Login</h3>
+  <form (ngSubmit)="submit()" #loginForm="ngForm">
+   
+    <div class="mb-3">
+      <label>Email</label>
+      <input
+        type="email"
+        style="font-size: medium;"
+        class="form-control"
+        name="email"
+       [(ngModel)]="email"
+        required
+      />
+    </div>
+   
+    <div class="mb-3">
+      <label>Password</label>
+      <div class="input-group">
+        <input style="font-size: medium;"
+          [type]="showPassword ? 'text' : 'password'"
+          class="form-control"
+          name="password"
+          [(ngModel)]="password"
+          required
+        />  
+     
+       <button
+          type="button"
+          class="btn btn-sm bg-dark text-white" 
+          (click)="togglePassword()" title="Show/Hide" 
+        >
+           <i class="fa fa-eye"></i> 
+        </button>
+      </div>
+    </div>
+    <button
+      type="submit"
+      class="btn btn-success w-100"
+      [disabled]="loginForm.invalid"
+    
+    >
+      Login
+    </button>
+        <a routerLink="/register" class="btn btn-link text-primary mt-2 d-block">
+           Don’t have an account? Register</a>
+  </form> -->
+
+  <!-- <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+    {{ errorMessage }}
+  </div> -->
+<!-- </div>
+</div>
+</div> -->

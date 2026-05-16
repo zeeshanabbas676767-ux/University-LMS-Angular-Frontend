@@ -1,0 +1,25 @@
+<style>
+  admin-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.main {
+  padding-top: 10px;
+}
+</style>
+<admin-navbar></admin-navbar>
+
+<div class="main">
+  <router-outlet></router-outlet>
+</div>
+
+<admin-footer></admin-footer>
+<!-- 
+<app-admin-navbar ></app-admin-navbar>
+<app-admin-sidebar></app-admin-sidebar>
+<div class="container-fluid">
+  <router-outlet></router-outlet>
+</div>
+<app-admin-footer></app-admin-footer> -->

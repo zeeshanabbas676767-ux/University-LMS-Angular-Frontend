@@ -1,0 +1,49 @@
+<div class="container mt-4">
+
+  <h3 style="text-align:center">Manage Users</h3>
+
+  <!-- <div *ngIf="error" class="error-message text-center" style="font-size: 20px;">
+    ✗ {{ error }}
+  </div>
+  <div *ngIf="loading" class="loading-message text-center" style="font-size: 20px;">
+    Loading...
+  </div> -->
+
+<div class="container-fluid" style="overflow:auto; max-width: 100%; ">
+
+    <table class="table table-dark">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Full Name</th>
+         <th>Email</th>
+         <th>Role</th> 
+         <th>Action</th> 
+      </tr> 
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of users">
+        <td>{{p.id}}</td>
+        <td>{{p.fullName}}</td>
+         <td>{{p.email}}</td>
+          <td>{{p.roleId}}</td>
+        <td>
+           <div class="action-buttons">
+            <button class="btn btn-danger btn-sm delete" (click)="delete(p.id)">
+            <i class="fa fa-trash" style="transform:scale(1.2);"></i>   Delete
+            </button>
+            </div>
+        </td>
+    
+    </tr>
+
+      <tr *ngIf="users.length === 0">
+        <td colspan="5" class="text-center text-muted py-4">
+          No Users found
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</div>

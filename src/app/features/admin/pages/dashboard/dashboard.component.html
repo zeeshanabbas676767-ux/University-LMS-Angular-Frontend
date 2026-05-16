@@ -1,0 +1,66 @@
+<div class="dash">
+
+  <div class="top-bar">
+    <i class="ti ti-layout-dashboard"></i>
+    <h1>Dashboard</h1>
+  </div>
+
+  <!-- Stat Cards -->
+  <div class="stats-grid">
+    <div class="stat-card bg-dark">
+      <div class="stat-icon icon-blue"><i class="ti ti-book"></i></div>
+      <div>
+        <div class="stat-label">Total courses</div>
+        <div class="stat-value">{{ totalCourse }}</div>
+        <div class="stat-sub">Active courses</div>
+      </div>
+    </div>
+    <div class="stat-card bg-dark">
+      <div class="stat-icon icon-teal"><i class="ti ti-user"></i></div>
+      <div>
+        <div class="stat-label">Total enrollments</div>
+        <div class="stat-value">{{ totalEnrollment }}</div>
+        <div class="stat-sub">Student enrollments</div>
+      </div>
+    </div>
+    <div class="stat-card bg-dark">
+      <div class="stat-icon icon-amber"><i class="ti ti-user"></i></div>
+      <div>
+        <div class="stat-label">Total teachers</div>
+        <div class="stat-value">{{ totalTeachers }}</div>
+        <div class="stat-sub">Role ID 2</div>
+      </div>
+    </div>
+    <div class="stat-card bg-dark">
+      <div class="stat-icon icon-purple"><i class="ti ti-user"></i></div>
+      <div>
+        <div class="stat-label">Total students</div>
+        <div class="stat-value">{{ totalStudents }}</div>
+        <div class="stat-sub">Role ID 3</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Panels -->
+  <div class="recent-grid">
+    <div class="panel bg-dark">
+      <div class="panel-header"><strong style="font-size: 20px;"><i class="ti ti-book"></i> Recent courses</strong></div>
+      <div *ngFor="let c of course | slice:0:5" class="list-item">
+        <span class="list-name">{{ c.title }}</span>
+        <span class="list-meta">{{ c.teacher?.fullName }}</span>
+      </div>
+    </div>
+    <div class="panel bg-dark">
+      <div class="panel-header"><strong style="font-size: 20px;"><i class="ti ti-user"></i> Users by role</strong></div>
+      <div *ngFor="let u of user" class="list-item">
+        <span class="list-name">{{ u.fullName }}</span>
+        <span class="badge" [ngClass]="{
+          'badge-admin': u.roleId === 1,
+          'badge-teacher': u.roleId === 2,
+          'badge-student': u.roleId === 3
+        }">{{ u.roleId === 1 ? 'Admin' : u.roleId === 2 ? 'Teacher' : 'Student' }}</span>
+      </div>
+    </div>
+  </div>
+
+</div>

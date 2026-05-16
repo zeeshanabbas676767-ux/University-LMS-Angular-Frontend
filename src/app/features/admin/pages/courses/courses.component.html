@@ -1,0 +1,85 @@
+<style>
+  label {
+  color: white;
+}
+</style>
+
+<div class="container mt-4">
+
+  <h3 style="text-align:center">Manage Courses</h3>
+
+  <!-- Add / Edit Form -->
+  <div class="card p-3 mb-4" style="background-color: black;">
+    <!-- <h5>{{ isEditMode ? 'Edit Course' : 'Add Course' }}</h5> -->
+
+    <div class="row">
+
+      <div class="col-md-4">
+        <label>Course Title</label>
+        <input type="text" class="form-control" [(ngModel)]="course.title">
+      </div>
+
+      <div class="col-md-4">
+        <label>Description</label>
+        <input type="text" class="form-control" [(ngModel)]="course.description">
+      </div>
+
+      <div class="col-md-4">
+        <label>Teacher</label>
+         <select class="form-control" [(ngModel)]="selectedTeacherId"> 
+          <option value="">Select Teacher</option>
+          <option *ngFor="let s of user" [value]="s.id">
+            {{ s.fullName  }} 
+          </option> 
+        </select>
+      </div>
+
+    </div>
+
+    <div class="mt-3">
+      <button class = "btn btn-outline-primary me-2" style = "color:white;font-weight:600" (click)="saveCourse()">
+        {{ isEditMode ? 'Update' : 'Add' }}
+      </button>
+
+      <button class = "btn btn-outline-secondary" style = "color:white;font-weight:600"  *ngIf="isEditMode" (click)="resetForm()">
+        Cancel
+      </button>
+    </div>
+  </div> 
+
+  <!-- Course List -->
+  <div class="container-fluid" style="overflow:auto; max-width: 100%; ">
+
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Description</th>  
+          <th>Teacher</th>
+          <th>Actions</th>
+        </tr>
+      </thead>  
+
+      <tbody>
+        <tr *ngFor="let c of courses">
+          <td>{{ c.title }}</td>
+          <td>{{ c.description }}</td>
+          <td>{{ c.teacher?.fullName }}</td>
+          <td>
+             <div class="action-buttons">
+            <button class="btn btn-primary btn-sm me-2 edit"  (click)="editCourse(c)">
+            <i class="fa fa-edit" style="transform:scale(1.2);"></i>    Edit
+            </button>
+
+            <button class="btn btn-danger btn-sm delete" (click)="deleteCourse(c.id)">
+            <i class="fa fa-trash" style="transform:scale(1.2);"></i>   Delete
+            </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+
+</div>

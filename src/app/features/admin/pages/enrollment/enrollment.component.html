@@ -1,0 +1,77 @@
+<style>
+  label {
+  color: white;
+}
+</style>
+<div class="container mt-4">
+
+  <h3 style="text-align:center">Enrollment</h3>
+
+  <!-- Enrollment Form -->
+  <div class="card p-3 mb-4" style="background-color: black;">
+    <div class="row">
+
+      <!-- Student Dropdown -->   
+      <div class="col-md-4">
+        <label>Student</label>
+        <select class="form-control" [(ngModel)]="selectedStudentId"> 
+          <option value="">Select Student</option>
+          <option *ngFor="let s of user" [value]="s.id">
+            {{ s.fullName  }} 
+          </option> 
+        </select>
+      </div>
+
+      <!-- Course Dropdown -->
+      <div class="col-md-4">
+        <label>Course</label>
+        <select class="form-control" [(ngModel)]="selectedCourseId">
+          <option value="">Select Course</option>
+          <option *ngFor="let c of courses" [value]="c.id">
+            {{ c.title }}
+          </option>
+        </select>
+      </div>
+ 
+      <!-- Button -->
+      <div class="col-md-4 d-flex align-items-end">
+        <button class="btn btn-primary w-100" (click)="enrollStudent()">
+          Enroll
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Enrollment List -->
+<div class="container-fluid" style="overflow:auto; max-width: 100%; ">
+
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Course</th>
+          <th>Student</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let e of enrollments">
+           <td>{{ e.id }}</td>
+          <td>{{ e.course?.title }}</td>
+          <td>{{ e.student?.fullName }}</td>
+           <td>
+             <div class="action-buttons">
+            <button class="btn btn-danger btn-sm delete" (click)="removeEnrollment(e.id)">
+            <i class="fa fa-trash" style="transform:scale(1.2);"></i>   Delete
+            </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+
+</div>

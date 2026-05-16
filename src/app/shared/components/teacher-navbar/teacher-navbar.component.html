@@ -1,0 +1,58 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	  <div class="container-fluid">
+	<a class="navbar-brand" *ngIf="!isTeacherLoggedIn" routerLink="/teacher/login">LMS University | Teacher</a>
+    <a class="navbar-brand" *ngIf="isTeacherLoggedIn" routerLink="/teacher/dashboard">LMS University | Teacher</a>
+	<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	  <span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarNav">
+	  <ul class="navbar-nav ms-auto">
+<strong *ngIf="!isTeacherLoggedIn" style="display: flex;">
+	<li class="nav-item">
+		  <a class="nav-link" routerLink="/teacher/login">Login</a>
+		</li>
+<!-- <li class="nav-item">
+		  <a class="nav-link" routerLink="/teacher/register">Register</a>
+</li> -->
+</strong>
+
+		  <li class="nav-item">
+          <a class="nav-link" routerLink="/admin/login">Admin</a>
+        </li>
+
+       <strong *ngIf="isTeacherLoggedIn" style="display: flex;">
+		
+		<li class="nav-item">
+		  <a class="nav-link active" aria-current="page" routerLink="/teacher/dashboard">Dashboard</a>
+		</li>
+
+		<li class="nav-item">
+		  <a class="nav-link" routerLink="/teacher/courses">Courses</a>
+		</li>
+		<li class="nav-item">
+		  <a class="nav-link" routerLink="/teacher/assignment">Assignments</a>
+		</li>
+		<li class="nav-item">
+		  <a class="nav-link" routerLink="/teacher/lectures">Lectures</a>
+		</li>
+		<li class="nav-item">
+		  <a class="nav-link" routerLink="/teacher/attendance">Attendance</a>
+		</li>
+		<li class="nav-item">
+		  <a class="nav-link" routerLink="/teacher/grades">Grades</a>
+		</li>
+		<li class="nav-item">
+		  <a class="nav-link" routerLink="/teacher/profile">Profile</a>
+		</li>
+		<li class="nav-item">
+		  <button class="btn btn-link nav-link" style="color: red;" (click)="logout()">Logout</button>	
+		</li>
+		</strong>
+	  </ul>
+	</div>
+  </div>
+</nav>
+
+
+
+

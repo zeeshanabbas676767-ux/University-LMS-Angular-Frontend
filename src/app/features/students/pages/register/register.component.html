@@ -1,0 +1,123 @@
+
+<style>
+  button.btn:disabled {
+  cursor: not-allowed !important;
+  pointer-events: all;
+}
+
+</style>
+<div class="card mt-5">
+<div class="card-body mt-5">
+<div class="container mt-5" style="max-width: 400px;">
+  <h3 class="mb-3 text-center">Student Register</h3>
+<div *ngIf="error" class="alert alert-danger text-center">
+  {{ error }}
+</div>
+  <form (ngSubmit)="  register()" #registerForm="ngForm">
+
+    
+    <div class="mb-3">
+      <label class="form-label">Full Name</label>
+      <input
+        type="text"
+        class="form-control "
+        name="fullName"
+        placeholder="Enter Full Name" style="font-size: medium;"
+        [(ngModel)]="fullName"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        name="email"
+          placeholder="Enter Email" style="font-size: medium;"
+        [(ngModel)]="email"
+        required
+      />
+    </div>
+
+     <div class="mb-3">
+      <label class="form-label">Role Id (3 for Student)</label>
+      <input
+        type="number"
+        class="form-control"
+        name="roleId"
+          placeholder="Enter Your Role Id" style="font-size: medium;"
+        [(ngModel)]="roleId"
+        required
+      />
+    </div>
+
+ <div class="mb-3">
+      <label>Password</label>
+      <div class="input-group">
+        <input
+          class="form-control"
+          name="password"
+            placeholder="Enter Password" style="font-size: medium;"
+           [type]="showPassword ? 'text' : 'password'" 
+          [(ngModel)]="password"
+          required
+          minlength="6"
+        />
+
+        <button
+          type="button"
+          class="btn btn-sm bg-dark text-white" 
+          title="Show/Hide"
+          (click)="togglePassword()"
+        >
+           <i class="fa fa-eye"></i> 
+        </button>
+      </div>
+    </div>
+
+    <div class="mb-3"> 
+      <label class="dis-flex">Confirm Password 
+        <strong *ngIf="password !== confirmPassword"
+        style="margin-left: 10px;color: red;"> Both Passwords should be same </strong>
+      </label>
+      <div class="input-group" >
+        <input 
+          class="form-control"
+           [type]="showConfirmPassword ? 'text' : 'password'" 
+          name="confirmPassword"
+            [(ngModel)]="confirmPassword"
+            placeholder="Enter Confirm Password" style="font-size: medium;"
+         
+          required
+        />
+         <button
+          type="button"
+          class="btn btn-sm bg-dark text-white" 
+            title="Show/Hide"
+            (click)="toggleConfirmPassword()"
+        >
+          <i class="fa fa-eye"></i> 
+        </button>
+      </div>
+    </div> 
+
+      <button
+      type="submit"
+      class="btn btn-primary w-100"
+      [disabled]="!fullName || !email || !roleId ||  roleId <= 2 || roleId >= 4 ||  !password || !confirmPassword || password !== confirmPassword"
+
+    >
+      Register
+    </button>
+        <a routerLink="/student/login" class="btn btn-link text-primary mt-2 d-block">
+           Already have an account? Login</a>
+       
+  </form>
+
+
+</div>
+</div>
+</div>
+
+

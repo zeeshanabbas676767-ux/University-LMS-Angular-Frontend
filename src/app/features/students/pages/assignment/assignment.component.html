@@ -1,0 +1,132 @@
+<style>
+  .page-wrapper  { padding: 30px; background-color: #0d0d0d; min-height: 100vh; }
+  label          { color: white; }
+  .badge-due     { background:#dc3545; color:white; padding:3px 10px;
+                   border-radius:20px; font-size:0.78rem; }
+  .badge-ok      { background:#198754; color:white; padding:3px 10px;
+                   border-radius:20px; font-size:0.78rem; }
+  .badge-submitted { background:#0d6efd; color:white; padding:3px 10px;
+                     border-radius:20px; font-size:0.78rem; }
+  .submit-panel  { background:#1a1a2e; border:1px solid #2a2a4a;
+                   border-radius:12px; padding:24px; margin-bottom:30px; }
+  .submit-title  { color:white; font-size:1.1rem; font-weight:600; margin-bottom:16px; }
+  .success-msg   { color:#198754; margin-top:10px; font-size:0.9rem; }
+  .error-msg     { color:#dc3545; margin-top:10px; font-size:0.9rem; }
+</style>
+
+<div class="page-wrapper">
+  <h3 style="text-align:center; color:white;">My Assignments</h3>
+
+  <!-- Submit Assignment Panel -->
+  <div class="submit-panel mt-4">
+    <div class="submit-title">📤 Submit Assignment</div>
+    <div class="row g-3">
+
+      <!-- Assignment dropdown — only unsubmitted -->
+      <div class="col-md-5">
+        <label>Select Assignment</label>
+        <select class="form-control" [(ngModel)]="selectedAssignmentId">
+          <option value="">-- Select Assignment --</option>
+          <option *ngFor="let a of submittableAssignments" [value]="a.id">
+            {{ a.title }} ({{ a.course?.title }})
+          </option>
+        </select>
+        <small style="color:#aaa;" *ngIf="submittableAssignments.length === 0">
+          All assignments have been submitted.
+        </small>
+      </div>
+
+      <!-- File upload -->
+      <div class="col-md-5">
+        <label>Upload File</label>
+        <input type="file" id="fileInput"
+               class="form-control"
+               (change)="onFileChange($event)">
+        <small style="color:#aaa;">
+          Accepted: PDF, DOC, DOCX, ZIP
+        </small>
+      </div>
+<small style="color:#aaa;" *ngIf="submittableAssignments.length === 0">
+  No assignments available to submit
+  (all are either submitted or past deadline).
+</small>
+      <!-- Submit button -->
+      <div class="col-md-2 d-flex align-items-end">
+      <button class="btn btn-outline-primary w-100"
+        style="color:white; font-weight:600;"
+        [disabled]="isSubmitting || submittableAssignments.length === 0"
+        (click)="submitAssignment()">
+  {{ isSubmitting ? 'Submitting...' : 'Submit' }}
+</button>
+      </div>
+
+    </div>
+
+    <div class="success-msg" *ngIf="submitMessage">✅ {{ submitMessage }}</div>
+    <div class="error-msg"   *ngIf="submitError">❌ {{ submitError }}</div>
+  </div>
+
+  <!-- Course Filter Dropdown -->
+  <div class="row mb-3">
+    <div class="col-md-4">
+      <label>Filter by Course</label>
+      <select class="form-control"
+              [(ngModel)]="selectedCourseId"
+              (ngModelChange)="onCourseChange()">
+        <option value="">All Courses</option>
+        <option *ngFor="let c of enrolledCourses" [value]="c.id">
+          {{ c.title }}
+        </option>
+      </select>
+    </div>
+    <div class="col-md-4 d-flex align-items-end">
+      <span style="color:#aaa; font-size:0.9rem;">
+        Showing {{ assignments.length }} assignment(s)
+      </span>
+    </div>
+  </div>
+
+  <!-- Assignments Table -->
+  <div class="container-fluid" style="overflow:auto;">
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Course</th>
+          <th>Deadline</th>
+          <th>Total Marks</th>
+          <th>Deadline Status</th>
+          <th>Submission</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let a of assignments">
+          <td>{{ a.title }}</td>
+          <td>{{ a.description }}</td>
+          <td>{{ a.course?.title }}</td>
+          <td>{{ a.deadline | date:'dd MMM yyyy, hh:mm a' }}</td>
+          <td>{{ a.totalMarks }}</td>
+          <td>
+            <span [class]="isOverdue(a.deadline) ? 'badge-due' : 'badge-ok'">
+              {{ isOverdue(a.deadline) ? 'Overdue' : 'Active' }}
+            </span>
+          </td>
+          <td>
+            <span *ngIf="isSubmitted(a.id)" class="badge-submitted">
+              ✅ Submitted
+            </span>
+            <span *ngIf="!isSubmitted(a.id)" style="color:#aaa; font-size:0.85rem;">
+              ⏳ Pending
+            </span>
+          </td>
+        </tr>
+        <tr *ngIf="assignments.length === 0">
+          <td colspan="7" style="text-align:center; color:#aaa;">
+            No assignments found.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
