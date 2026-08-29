@@ -43,6 +43,18 @@
       />
     </div>
 
+     <div class="mb-3">
+      <label class="form-label">Department Name</label>
+      <input
+        type="text"
+        class="form-control"
+        name="department_Name"
+          placeholder="Enter Department Name" style="font-size: medium;"
+        [(ngModel)]="department_Name"
+        required
+      />
+    </div>
+
       <div class="mb-3">
       <label class="form-label">Role Id (1 for Admin)</label>
       <input
@@ -108,7 +120,7 @@
       <button
       type="submit"
       class="btn btn-primary w-100"
-      [disabled]="!email || !password || !name || !roleId || roleId <= 0 || roleId >= 2 || password !== confirmPassword"
+      [disabled]="!email || !department_Name || !password || !name || !roleId || roleId <= 0 || roleId >= 2 || password !== confirmPassword"
     >
       Register
     </button>
