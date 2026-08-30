@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Course } from '../../shared/models/courses.model';
-import { ApodResponse } from '../../shared/models/ApodResponse.model';
 import { Assignment } from '../../shared/models/assignment.model';
 import { Observable } from 'rxjs';
 

@@ -16,6 +16,7 @@ export class TeachersRegisterComponent {
     fullName = '';
     email = '';
     password = '';
+    department_Name = '';
     roleId = 2
  
   confirmPassword = '';
@@ -49,6 +50,7 @@ this.error = null;
   this.auth.register({
     fullName: this.fullName,
     email: this.email,
+    department_Name: this.department_Name,
     password: this.password,
     roleId: this.roleId
   }).subscribe({

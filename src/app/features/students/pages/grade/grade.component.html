@@ -1,0 +1,127 @@
+<div class="student-scores-container" style="padding: 24px; font-family: sans-serif; max-width: 1200px; margin: 0 auto;">
+  
+  <div style="margin-bottom: 20px;">
+    <h3 style="text-align: center;">Assignments Grade</h3>
+    <!-- <p style="color: #666; margin: 0;">Track your submission statuses, performance scores, and professor feedback.</p> -->
+  </div>
+
+  <div *ngIf="isLoading" style="text-align: center; padding: 40px;">
+    <h3>Loading...</h3>
+  </div>
+
+  <div *ngIf="errorMessage" style="background-color: #f8d7da; color: #721c24; padding: 15px; border-radius: 6px; margin-bottom: 20px;">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="!isLoading && submissions.length === 0" style="text-align: center; padding: 40px; border: 2px dashed #ccc; border-radius: 8px; color: #777;">
+    <p>You haven't submitted any assignments yet.</p>
+  </div>
+
+  <div *ngIf="!isLoading && submissions.length > 0" class="table-responsive mt-5" style="box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; border: 1px solid #e0e0e0;">
+    <table style="width: 100%; border-collapse: collapse; text-align: left; background: white;">
+      <thead>
+        <tr style="background-color: #007bff; color: white;">
+          <th style="padding: 14px 16px;">Assignment Info</th>
+          <th style="padding: 14px 16px;">Submitted Date</th>
+          <th style="padding: 14px 16px;">Status</th>
+          <th style="padding: 14px 16px; text-align: center;">Score</th>
+          <th style="padding: 14px 16px;">Teacher Feedback</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let sub of submissions" style="border-bottom: 1px solid #eee; transition: background 0.2s;" onmouseover="this.style.backgroundColor='#f9f9f9'" onmouseout="this.style.backgroundColor='transparent'">
+          
+          <td style="padding: 14px 16px; font-weight: 600; color: #444;">
+            {{ sub.assignment?.title }}
+          </td>
+          <!-- <span style="font-weight: normal; color: #888;">({{ sub.courseName }})</span> -->
+          
+          <td style="padding: 14px 16px; color: #666;">
+            {{ sub.submittedAt | date:'mediumDate' }}
+          </td>
+          
+          <td style="padding: 14px 16px;">
+            <span [style.background-color]="(sub.score !== null && sub.score !== undefined) ? '#e2f0d9' : '#fff3cd'" 
+                  [style.color]="(sub.score !== null && sub.score !== undefined) ? '#385723' : '#856404'" 
+                  style="padding: 6px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; display: inline-block;">
+              {{ (sub.score !== null && sub.score !== undefined) ? 'Scored' : 'Pending Review' }}
+            </span>
+          </td>
+          
+          <td style="padding: 14px 16px; text-align: center; font-size: 1.2rem; font-weight: bold; color: #007bff;">
+            {{ (sub.score !== null && sub.score !== undefined) ? sub.score : '--' }}
+          </td>
+          
+          <td [style.font-style]="sub.teacherFeedback ? 'normal' : 'italic'" style="padding: 14px 16px; max-width: 400px; color: #555;">
+            {{ sub.teacherFeedback ? sub.teacherFeedback : 'No feedback provided yet.' }}
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!-- <div class="student-scores-container" style="padding: 24px; font-family: sans-serif; max-width: 1200px; margin: 0 auto;">
+  
+  <div style="margin-bottom: 20px;">
+    <h2 style="color: #333; margin-bottom: 8px;">My Assignment Report & scores</h2>
+    <p style="color: #666; margin: 0;">Track your submission statuses, performance scores, and professor feedback.</p>
+  </div>
+
+  <div *ngIf="isLoading" style="text-align: center; padding: 40px; color: #007bff;">
+    <h3>Loading your scores...</h3>
+  </div>
+
+  <div *ngIf="errorMessage" style="background-color: #f8d7da; color: #721c24; padding: 15px; border-radius: 6px; margin-bottom: 20px;">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="!isLoading && submissions.length === 0" style="text-align: center; padding: 40px; border: 2px dashed #ccc; border-radius: 8px; color: #777;">
+    <p>You haven't submitted any assignments yet.</p>
+  </div>
+
+  <div *ngIf="!isLoading && submissions.length > 0" class="table-responsive" style="box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; border: 1px solid #e0e0e0;">
+    <table style="width: 100%; border-collapse: collapse; text-align: left; background: white;">
+      <thead>
+        <tr style="background-color: #007bff; color: white;">
+          <th style="padding: 14px 16px;">Assignment ID</th>
+          <th style="padding: 14px 16px;">Submitted Date</th>
+          <th style="padding: 14px 16px;">Status</th>
+          <th style="padding: 14px 16px; text-align: center;">score</th>
+          <th style="padding: 14px 16px;">Teacher Feedback</th>
+        </tr>
+      </thead>
+      <tbody>
+    <tr *ngFor="let sub of submissions" style="border-bottom: 1px solid #eee; transition: background 0.2s;" onmouseover="this.style.backgroundColor='#f9f9f9'" onmouseout="this.style.backgroundColor='transparent'">
+  
+  <td style="padding: 14px 16px; font-weight: 600; color: #444;">
+    {{ sub.assignmentTitle }} ({{ sub.courseName }})
+  </td>
+  
+  <td style="padding: 14px 16px; color: #666;">
+    {{ sub.submittedAt | date:'mediumDate' }}
+  </td>
+  
+  <td style="padding: 14px 16px;">
+    <span [style.background-color]="(sub.score !== null && sub.score !== undefined) ? '#e2f0d9' : '#fff3cd'" 
+          [style.color]="(sub.score !== null && sub.score !== undefined) ? '#385723' : '#856404'" 
+          style="padding: 6px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; display: inline-block;">
+      {{ (sub.score !== null && sub.score !== undefined) ? 'Scored' : 'Pending Review' }}
+    </span>
+  </td>
+  
+  <td style="padding: 14px 16px; text-align: center; font-size: 1.2rem; font-weight: bold; color: #007bff;">
+    {{ (sub.score !== null && sub.score !== undefined) ? sub.score : '--' }}
+  </td>
+  
+  <td [style.font-style]="sub.teacherFeedback ? 'normal' : 'italic'" style="padding: 14px 16px; max-width: 400px; color: #555;">
+    {{ sub.teacherFeedback ? sub.teacherFeedback : 'No feedback provided yet.' }}
+  </td>
+
+</tr>
+      </tbody>
+    </table>
+  </div>
+</div> -->

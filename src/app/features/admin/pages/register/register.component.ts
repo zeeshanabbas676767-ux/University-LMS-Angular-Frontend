@@ -14,6 +14,7 @@ import { AuthService } from '../../../../core/services/auth.service';
 export class AdminRegisterComponent {
   name = '';
     email = ''
+    department_Name = '';
     password = '' 
     roleId = 1;
     error: string | null = null  
@@ -34,7 +35,7 @@ export class AdminRegisterComponent {
   
 register() {
   
-  if(!this.name || !this.email || !this.password) {
+  if(!this.name || !this.email ||!this.department_Name || !this.password) {
     this.error = 'Please fill in all fields.';
     return;
   }
@@ -47,6 +48,7 @@ this.error = null;
   this.auth.register({
     fullName: this.name,
     email: this.email,
+    department_Name: this.department_Name,
     password: this.password,
     roleId: this.roleId
   }).subscribe({

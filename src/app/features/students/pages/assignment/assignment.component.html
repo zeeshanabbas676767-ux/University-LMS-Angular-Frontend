@@ -31,9 +31,6 @@
             {{ a.title }} ({{ a.course?.title }})
           </option>
         </select>
-        <small style="color:#aaa;" *ngIf="submittableAssignments.length === 0">
-          All assignments have been submitted.
-        </small>
       </div>
 
       <!-- File upload -->
@@ -47,8 +44,7 @@
         </small>
       </div>
 <small style="color:#aaa;" *ngIf="submittableAssignments.length === 0">
-  No assignments available to submit
-  (all are either submitted or past deadline).
+  No assignments available to submit.
 </small>
       <!-- Submit button -->
       <div class="col-md-2 d-flex align-items-end">

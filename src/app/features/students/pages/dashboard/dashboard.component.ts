@@ -13,6 +13,7 @@ import { AuthService } from '../../../../core/services/auth.service';
 })
 export class StudentDashboardComponent implements OnInit {
   studentName = '';
+  studentDepartment = '';
   totalEnrolled = 0;
   totalAssignments = 0;
   totalLectures = 0;
@@ -31,7 +32,7 @@ export class StudentDashboardComponent implements OnInit {
     if (!student) return;
 
     this.studentName = student.fullName;
-
+    this.studentDepartment = student.department_Name;
     // Total Enrolled Courses
     this.enrollmentService.getByStudent(student.id).subscribe(data => {
       this.totalEnrolled = data.length;

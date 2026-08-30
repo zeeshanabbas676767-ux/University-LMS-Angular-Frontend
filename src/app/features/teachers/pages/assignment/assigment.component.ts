@@ -53,15 +53,19 @@ export class TeachersAssignmentComponent implements OnInit {
     const teacher = this.authService.getStoredUser();
   if (!teacher) return;
 
-    this.assignmentService.getAssignment(teacher.id).subscribe(data => {
-      this.assignment = data;
+    this.assignmentService.getAssignment(teacher.id).subscribe({
+      next: (data) => this.assignment = data,
+      error: (err) => console.error('Error loading assignments:', err)
     });
   }
 
-  saveCourse() {
+  saveAssignment() {
     if (!this.formAssignment.title || !this.formAssignment.description ||
         !this.formAssignment.deadline || !this.formAssignment.totalMarks ||
         !this.selectedCourseId) {       // ← check selectedCourseId
+          if(this.formAssignment.totalMarks < 0) {
+            alert('Total marks cannot be negative');
+          }
       alert('Please fill in all fields');
       return;
     }

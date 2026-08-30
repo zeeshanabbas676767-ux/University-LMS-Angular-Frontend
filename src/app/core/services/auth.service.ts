@@ -31,7 +31,12 @@ private isLoggedInSubject = new BehaviorSubject<boolean>(!!localStorage.getItem(
     this.isLoggedInSubject.next(status);
   }
 
- 
+ createUser(user: User) {
+    return this.https.post(this.apiUrl , user);
+  }
+  updateUser(user: User) {
+    return this.https.put(`${this.apiUrl}/${user.id}`, user);
+  }
 
 
   getAllUsers(): Observable<User[]> {
@@ -49,7 +54,7 @@ private isLoggedInSubject = new BehaviorSubject<boolean>(!!localStorage.getItem(
     );
   }
  register(data: RegisterDto) {
-  return this.https.post<AuthResponse>(`${this.apiUrl}/register`, data)
+  return this.https.post<AuthResponse>(`${this.apiUrl}/register`, data, { withCredentials: true })
     .pipe(
       tap(res => {
         localStorage.setItem('token', res.token);
@@ -73,6 +78,11 @@ private isLoggedInSubject = new BehaviorSubject<boolean>(!!localStorage.getItem(
     const user = localStorage.getItem('user');
     return user ? JSON.parse(user) : null;
   }
+  getCurrentUserId(): number {
+  const user = this.getStoredUser();
+  // Return the user ID if found, otherwise default to 0
+  return user && user.id ? user.id : 0;
+}
 
   getToken(): string | null {
     return localStorage.getItem('token');

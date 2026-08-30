@@ -12,6 +12,7 @@ import { Router, RouterLink } from "@angular/router";
 export class StudentsRegisterComponent {
   fullName = '';
   email = ''
+  department_Name = '';
   password = ''
   roleId = 3;
   error: string | null = null
@@ -44,6 +45,7 @@ this.error = null;
   this.auth.register({
     fullName: this.fullName,
     email: this.email,
+    department_Name: this.department_Name,
     password: this.password,
     roleId: this.roleId
   }).subscribe({

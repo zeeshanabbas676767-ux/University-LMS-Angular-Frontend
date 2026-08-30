@@ -5,7 +5,7 @@ import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class SubmissionService {
-  private apiUrl = `${environment.apiUrl}/assignmentsubmission`;
+  private apiUrl = `${environment.apiUrl}/AssignmentSubmission`;
 
   constructor(private http: HttpClient) {}
 
@@ -15,16 +15,16 @@ export class SubmissionService {
     formData.append('assignmentId', assignmentId.toString());
     formData.append('studentId', studentId.toString());
     formData.append('file', file);
-    return this.http.post(`${this.apiUrl}/submit`, formData);
+    return this.http.post(`${this.apiUrl}/submit`, formData,{withCredentials: true});
   }
 
   // Get student's submissions
   getByStudent(studentId: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/student/${studentId}`);
+    return this.http.get<any[]>(`${this.apiUrl}/student/${studentId}`,{withCredentials: true});
   }
 
   // Teacher: get submissions for an assignment
   getByAssignment(assignmentId: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/assignment/${assignmentId}`);
+    return this.http.get<any[]>(`${this.apiUrl}/assignment/${assignmentId}`,{withCredentials: true});
   }
 }

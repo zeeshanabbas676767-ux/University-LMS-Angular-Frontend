@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AttendanceService } from '../../../../core/services/attendance.service';
 import { AuthService } from '../../../../core/services/auth.service';
 import { LectureService } from '../../../../core/services/lecture.service';
+import { Attendance } from '../../../../shared/models/attendance.model';
 
 @Component({
   selector: 'student-attendance',

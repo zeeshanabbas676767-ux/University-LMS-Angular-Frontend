@@ -7,42 +7,58 @@
 
   <!-- Stat Cards -->
   <div class="stats-grid">
+      <div class="stat-card bg-dark">
+      <div class="stat-icon icon-blue"><i class="fa fa-building"></i></div>
+      <div style="text-align: center;">
+        <h4>Total Departments</h4>
+        <strong style="font-size: 50px;">{{ totalDepartments }}</strong>
+      </div>
+    </div>
+
     <div class="stat-card bg-dark">
-      <div class="stat-icon icon-blue"><i class="ti ti-book"></i></div>
-      <div>
-        <div class="stat-label">Total courses</div>
-        <div class="stat-value">{{ totalCourse }}</div>
-        <div class="stat-sub">Active courses</div>
+      <div class="stat-icon icon-blue"><i class="fa fa-book"></i></div>
+      <div style="text-align: center;">
+        <h3>Total courses</h3>
+        <strong style="font-size: 50px;">{{ totalCourse }}</strong>
+      </div>
+    </div>
+
+    <div class="stat-card bg-dark">
+      <div class="stat-icon icon-teal"><i class="fa fa-user-graduate"></i></div>
+      <div style="text-align: center;">
+        <h3>Total enrollments</h3>
+        <strong style="font-size: 50px;">{{ totalEnrollment }}</strong>
+      </div>
+    </div>
+  </div>
+    <div class="stats-grid">
+    <div class="stat-card bg-dark">
+      <div class="stat-icon icon-amber"><i class="fa fa-chalkboard-teacher"></i></div>
+      <div style="text-align: center;">
+        <h3>Total teachers</h3>
+       <strong style="font-size: 50px;">{{ totalTeachers }}</strong>
       </div>
     </div>
     <div class="stat-card bg-dark">
-      <div class="stat-icon icon-teal"><i class="ti ti-user"></i></div>
-      <div>
-        <div class="stat-label">Total enrollments</div>
-        <div class="stat-value">{{ totalEnrollment }}</div>
-        <div class="stat-sub">Student enrollments</div>
+      <div class="stat-icon icon-amber"></div>
+      <div  style="text-align: center;">
+        <div class="stat-label"></div>
+        <div class="stat-value"></div>
+        <div class="stat-sub"></div>
       </div>
     </div>
+    
     <div class="stat-card bg-dark">
-      <div class="stat-icon icon-amber"><i class="ti ti-user"></i></div>
-      <div>
-        <div class="stat-label">Total teachers</div>
-        <div class="stat-value">{{ totalTeachers }}</div>
-        <div class="stat-sub">Role ID 2</div>
-      </div>
-    </div>
-    <div class="stat-card bg-dark">
-      <div class="stat-icon icon-purple"><i class="ti ti-user"></i></div>
-      <div>
-        <div class="stat-label">Total students</div>
-        <div class="stat-value">{{ totalStudents }}</div>
-        <div class="stat-sub">Role ID 3</div>
+      <div class="stat-icon icon-purple"><i class="fa fa-user-graduate"></i></div>
+      <div style="text-align: center;">
+        <h3>Total students</h3>
+        <strong style="font-size: 50px;">{{ totalStudents }}</strong>
       </div>
     </div>
   </div>
 
   <!-- Bottom Panels -->
-  <div class="recent-grid">
+  <!-- <div class="recent-grid">
     <div class="panel bg-dark">
       <div class="panel-header"><strong style="font-size: 20px;"><i class="ti ti-book"></i> Recent courses</strong></div>
       <div *ngFor="let c of course | slice:0:5" class="list-item">
@@ -61,6 +77,6 @@
         }">{{ u.roleId === 1 ? 'Admin' : u.roleId === 2 ? 'Teacher' : 'Student' }}</span>
       </div>
     </div>
-  </div>
+  </div> -->
 
 </div>

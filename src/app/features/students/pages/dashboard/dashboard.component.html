@@ -13,7 +13,7 @@
     margin-bottom: 30px;
     color: #ccc;
   }
-  .welcome span { color: #0d6efd; }
+  .welcome span { color: #c8c0c0; }
 
   .stat-card {
     background-color: #1a1a2e;
@@ -46,11 +46,11 @@
   .overdue-color  { border-top: 4px solid #dc3545; }
   .overdue-color .count  { color: #dc3545; }
 </style>
- <h2 style="text-align: center;">Student Dashboard</h2>
+ <h2 style="text-align: center;">I'm {{ studentName }}</h2>
 <div class="dashboard-wrapper">
 
   <div class="welcome">
-    Welcome, <span>{{ studentName }}</span> 👋
+    Department: <span>{{ studentDepartment }}</span>
   </div>
 
   <!-- Row 1 — Main Stats -->

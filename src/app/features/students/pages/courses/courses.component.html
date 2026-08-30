@@ -53,9 +53,9 @@
 
     <div class="col-md-4 me-3 course-card" *ngFor="let c of allCourses">
       <div>
-        <div class="title">Course: {{ c.title }}</div>
-        <div class="meta">Description: {{ c.description }}</div>
-        <div class="teacher">Faculty: {{c.teacher?.fullName}}</div>
+        <div class="title">Course: <b>{{ c.title }}</b></div>
+        <div class="meta">Description: <b>{{ c.description }}</b></div>
+        <div class="teacher">Faculty: <b>{{ c.teacher?.fullName }}</b></div>
       </div>
       <div>
         <span *ngIf="isEnrolled(c.id)" class="badge-enrolled">Enrolled</span>

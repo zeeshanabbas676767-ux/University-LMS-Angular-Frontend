@@ -61,6 +61,9 @@ constructor(
   }
 
   // Getters for counts by role
+  get totalDepartments(): number {
+    return this.user.filter(u => u.department_Name).length;
+  }
   get totalStudents(): number {
     return this.user.filter(u => u.roleId === 3).length;
   }

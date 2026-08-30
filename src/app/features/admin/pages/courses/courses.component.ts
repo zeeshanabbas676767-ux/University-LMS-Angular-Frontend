@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
  import { Course } from '../../../../shared/models/courses.model';
 import { CourseService } from '../../../../core/services/course.service';
-import { ApodResponse } from '../../../../shared/models/ApodResponse.model';
 import { User } from '../../../../shared/models/user.model';
 import { AuthService } from '../../../../core/services/auth.service';
 
@@ -16,17 +15,21 @@ import { AuthService } from '../../../../core/services/auth.service';
 })
 export class AdminCoursesComponent implements OnInit {  
   courses: Course[] = [];
+
   course = {
     id: 0,
     title: '',
     description: '',
-    teacherId: 0 ,
-    
+     teacherId: 0 ,
   };
 
     selectedTeacherId = 0;
 isEditMode = false;
+selectedDepartment = '';
+
   user: User[] = [];
+filteredUsers: User[] = [];
+uniqueDepartments: string[] = [];
 
   constructor(private courseService: CourseService, private authService: AuthService) {}
   ngOnInit() {
@@ -35,7 +38,14 @@ isEditMode = false;
   }
 loadUsers() {
     this.authService.getAllUsers().subscribe((data: any) => {
-      this.user = data.filter((u: User) => u.roleId === 2); 
+        // Extract ALL unique departments from the raw database response first
+    const allDepartments = data.map((u: any) => u.department_Name).filter(Boolean);
+    this.uniqueDepartments = [...new Set(allDepartments)].sort() as string[];
+
+    // Now, filter the users array down to teachers (roleId === 2) for your teacher logic
+    this.user = data.filter((u: User) => u.roleId === 2); 
+    this.filteredUsers = this.user;
+
     });
   }
   
@@ -45,7 +55,7 @@ loadUsers() {
     });
   }
 
-  
+   
   createCourse() {
     this.courseService.createCourse(this.course).subscribe(() => {
       this.loadCourses(); // Refresh the course list after creation
@@ -98,6 +108,10 @@ loadUsers() {
   this.course = { ...course };
   this.selectedTeacherId = course.teacherId; // ← sync dropdown
   this.isEditMode = true;
+}
+filterStudents() {
+  this.filteredUsers = this.user.filter((u: User) =>
+    (!this.selectedDepartment || u.department_Name === this.selectedDepartment) );
 }
 
   deleteCourse(id: number) {

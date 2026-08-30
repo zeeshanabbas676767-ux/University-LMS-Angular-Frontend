@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Course } from '../../shared/models/courses.model';
-import { ApodResponse } from '../../shared/models/ApodResponse.model';
 
 @Injectable({ providedIn: 'root' })
 export class CourseService {
@@ -14,7 +13,7 @@ export class CourseService {
   getCourses() {
     return this.http.get<Course[]>(this.apiUrl);
   }
-
+ 
   createCourse(course: Course) {
     return this.http.post(this.apiUrl, course);
   }

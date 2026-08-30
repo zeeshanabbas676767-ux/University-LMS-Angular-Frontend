@@ -9,7 +9,7 @@
 <div class="card mt-5">
 <div class="card-body mt-5">
 <div class="container mt-5" style="max-width: 400px;">
-  <h3 class="mb-3 text-center">Admin Register</h3>
+  <h3 class="mb-3 text-center">ADMIN Register</h3>
 <div *ngIf="error" class="alert alert-danger text-center">
   {{ error }}
 </div>
@@ -39,6 +39,18 @@
         name="email"
           placeholder="Enter Email" style="font-size: medium;"
         [(ngModel)]="email"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Department Name</label>
+      <input
+        type="text"
+        class="form-control"
+        name="department_Name"
+          placeholder="Enter Department Name" style="font-size: medium;"
+        [(ngModel)]="department_Name"
         required
       />
     </div>
@@ -108,7 +120,7 @@
       <button
       type="submit"
       class="btn btn-primary w-100"
-      [disabled]="!email || !password || !name || !roleId || roleId <= 0 || roleId >= 2 || password !== confirmPassword"
+      [disabled]="!email ||!department_Name || !password || !name || !roleId || roleId <= 0 || roleId >= 2 || password !== confirmPassword"
     >
       Register
     </button>

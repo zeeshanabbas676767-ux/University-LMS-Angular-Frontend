@@ -11,12 +11,24 @@
   <div class="card p-3 mb-4" style="background-color: black;">
     <div class="row">
 
+      <!-- Department Name -->
+      <div class="col-md-4">
+        <label>Department Name</label>
+        <select class="form-control" [(ngModel)]="selectedDepartment"  (change)="filterStudents()"> 
+          <option value="">Select Department</option>
+          <option *ngFor="let d of uniqueDepartments" [value]="d">
+            {{ d }}
+          </option>
+        </select>
+      </div>
+
+
       <!-- Student Dropdown -->   
       <div class="col-md-4">
         <label>Student</label>
         <select class="form-control" [(ngModel)]="selectedStudentId"> 
           <option value="">Select Student</option>
-          <option *ngFor="let s of user" [value]="s.id">
+          <option *ngFor="let s of filteredUsers" [value]="s.id">
             {{ s.fullName  }} 
           </option> 
         </select>
@@ -25,17 +37,17 @@
       <!-- Course Dropdown -->
       <div class="col-md-4">
         <label>Course</label>
-        <select class="form-control" [(ngModel)]="selectedCourseId">
+        <select class="form-control" [(ngModel)]="selectedCourseId" (change)="filterStudents()">
           <option value="">Select Course</option>
-          <option *ngFor="let c of courses" [value]="c.id">
+          <option *ngFor="let c of filteredCourses" [value]="c.id">
             {{ c.title }}
           </option>
         </select>
       </div>
  
       <!-- Button -->
-      <div class="col-md-4 d-flex align-items-end">
-        <button class="btn btn-primary w-100" (click)="enrollStudent()">
+      <div class="col-md-4 d-flex align-items-end mt-4">
+        <button  class = "btn btn-outline-primary me-2" style = "color:white;font-weight:600" (click)="enrollStudent()">
           Enroll
         </button>
       </div>
@@ -50,6 +62,7 @@
       <thead>
         <tr>
           <th>ID</th>
+          <th>Department</th>
           <th>Course</th>
           <th>Student</th>
           <th>Action</th>
@@ -59,6 +72,7 @@
       <tbody>
         <tr *ngFor="let e of enrollments">
            <td>{{ e.id }}</td>
+          <td>{{ e.student?.department_Name }}</td>
           <td>{{ e.course?.title }}</td>
           <td>{{ e.student?.fullName }}</td>
            <td>

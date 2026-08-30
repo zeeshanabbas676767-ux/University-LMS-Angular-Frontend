@@ -1,0 +1,88 @@
+<style>
+    button.btn:disabled {
+  cursor: not-allowed !important;
+  pointer-events: all;
+}
+</style>
+<h3 style="text-align:center; color:white;">Grade Assignment</h3>
+
+    <div class="mb-4 p-3 mt-5" style="display: flex; gap: 10px; align-items: center;width: 30%">
+      <select [(ngModel)]="assignmentId" (change)="onAssignmentSelected()" style="flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+        <option [value]="null">-- Choose an assignment --</option>
+        <option *ngFor="let assignment of assignments" [value]="assignment.id">
+          {{ assignment.title }} (Deadline: {{ assignment.deadline | date:'short' }})
+        </option>
+      </select>
+    </div>
+
+    <div class="list-panel" style="background-color: black;flex: 1; border: 1px solid #ccc; padding: 15px; border-radius: 8px;">
+      <h3>Student Submissions</h3>
+      <div *ngIf="!assignmentId" style="padding: 20px; text-align: center; color: #999;">
+        Please select an assignment to view submissions
+      </div>
+      <div *ngIf="assignmentId && submissions.length === 0" style="padding: 20px; text-align: center; color: #999;">
+        No submissions found for this assignment
+      </div>
+      <table class="table table-dark" *ngIf="assignmentId && submissions.length > 0" style="width: 100%; border-collapse: collapse;">
+      <thead>
+        <tr style="text-align: left;">
+          <th style="padding: 8px;">Student Name</th>
+          <th style="padding: 8px;">Status</th>
+          <th style="padding: 8px;">Score</th>
+          <th style="padding: 8px;">Feedback</th>
+          <th style="padding: 8px;">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let sub of submissions" style="border-bottom: 1px solid #eee;">
+          <td style="padding: 8px;">{{ sub.student?.fullName }}</td>
+          <td style="padding: 8px;"> 
+            <!-- <span [style.color]="sub.grade ? 'green' : 'orange'">
+              {{ sub.grade ? 'Graded' : 'Pending' }}
+            </span> -->
+            <span [style.color]="(sub.score !== null && sub.score !== undefined) ? 'green' : 'orange'">
+      {{ (sub.score !== null && sub.score !== undefined) ? 'Graded' : 'Pending' }}
+    </span>
+          </td>
+          <td style="padding: 8px;">{{ (sub.score !== null && sub.score !== undefined) ? sub.score : '-' }}</td>
+          <td style="padding: 8px;">{{ sub.teacherFeedback ? sub.teacherFeedback : '-' }}</td>
+          <td style="padding: 8px;">
+            <button type="button" class="btn btn-primary btn-sm" (click)="selectSubmission(sub)" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Grade</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+<div class="modal fade" *ngIf="selectedSubmission" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="background-color: black;">
+      <div class="modal-header">
+        <h5 class="modal-title fs-5" id="exampleModalLabel">Grading Student: {{ selectedSubmission.student?.fullName }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="color: white;"><i class="fa fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Grade Score/Number:</label>
+            <input type="number" 
+            class="form-control" 
+            id="recipient-name" name="grade"
+            [(ngModel)]="gradeValue" placeholder="e.g. 95, 67.5 etc." step="0.01">
+            <!--You can also use [ngModelOptions]="{standalone: true}" instead of name attribute-->
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">Feedback Comments:</label>
+            <textarea class="form-control" 
+            id="message-text" name="feedback" 
+            [(ngModel)]="feedbackValue" placeholder="Good job, but..."></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-info" [disabled]="!gradeValue || !feedbackValue" (click)="onSaveGrade()">Send message <i class="fas fa-paper-plane"></i></button>
+      </div>
+    </div>
+  </div>
+</div>

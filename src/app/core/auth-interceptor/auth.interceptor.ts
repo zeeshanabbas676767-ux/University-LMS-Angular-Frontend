@@ -7,6 +7,7 @@ export function authInterceptor(req: HttpRequest<any>, next: HttpHandlerFn): Obs
   const token = localStorage.getItem('token');
   if (token) {
     req = req.clone({
+      withCredentials: true,
       setHeaders: {
         Authorization: `Bearer ${token}`
       }

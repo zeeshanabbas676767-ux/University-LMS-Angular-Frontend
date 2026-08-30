@@ -16,6 +16,7 @@ export class TeachersDashboardComponent implements OnInit {
   totalAssignments = 0;
   totalLectures = 0;
   teacherName = '';
+  teacherDepartment = '';
 
   constructor(
     private courseService: CourseService,
@@ -29,6 +30,7 @@ export class TeachersDashboardComponent implements OnInit {
     if (!teacher) return;
 
     this.teacherName = teacher.fullName;
+    this.teacherDepartment = teacher.department_Name;
 
     // Total Courses
     this.courseService.getCoursesByTeacher(teacher.id).subscribe(data => {

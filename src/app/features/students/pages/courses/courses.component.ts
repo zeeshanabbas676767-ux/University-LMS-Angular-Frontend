@@ -35,7 +35,7 @@ export class StudentCoursesComponent implements OnInit {
     this.enrollmentService.getByStudent(this.studentId).subscribe(data => {
       this.enrolledCourses = data;
     });
-  }
+  } 
 
   loadAllCourses() {
     this.courseService.getCourses().subscribe(data => {

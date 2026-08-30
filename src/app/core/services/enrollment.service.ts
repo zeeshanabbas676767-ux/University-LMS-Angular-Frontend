@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class EnrollmentService {
 
   private apiUrl = `${environment.apiUrl}/enrollment`;
-
+ 
   constructor(private http: HttpClient) {}
   getAll() {
     return this.http.get<Enrollment[]>(this.apiUrl);

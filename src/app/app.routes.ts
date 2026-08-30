@@ -20,6 +20,7 @@ import { StudentCoursesComponent } from './features/students/pages/courses/cours
 import { StudentAttendanceComponent } from './features/students/pages/attendance/attendance.component';
 import { StudentLectureComponent } from './features/students/pages/lecture/lecture.component';
 import { StudentsProgressComponent } from './features/students/pages/progress/progress.component';
+import { StudentGradesComponent } from './features/students/pages/grade/grade.component';
 
 // Teachers
 import { TeachersLoginComponent } from './features/teachers/pages/login/login.component';
@@ -30,6 +31,7 @@ import { TeachersCoursesComponent } from './features/teachers/pages/courses/cour
 import { TeachersAttendanceComponent } from './features/teachers/pages/attendance/attendance.component';
 import { TeachersLectureComponent } from './features/teachers/pages/lecture/lecture.component';
 import { TeachersProgressComponent } from './features/teachers/pages/progress/progress.component';
+import { GradingComponent } from './features/teachers/pages/grade/grade.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { TeachersAssignmentComponent } from './features/teachers/pages/assignment/assigment.component';
 import { StudentsRegisterComponent } from './features/students/pages/register/register.component';
@@ -47,6 +49,7 @@ export const routes: Routes = [
      { path: 'assignment', component: StudentAssignmentComponent },
     { path: 'lecture', component: StudentLectureComponent },
     { path: 'progress', component: StudentsProgressComponent },
+    { path: 'grades', component: StudentGradesComponent },
     {path: 'login', component: StudentsLoginComponent},
      {path: 'register', component: StudentsRegisterComponent}
   ]
@@ -62,6 +65,7 @@ export const routes: Routes = [
     { path: 'attendance', component: TeachersAttendanceComponent },
     { path: 'lectures', component: TeachersLectureComponent },
     { path: 'progress', component: TeachersProgressComponent },
+    { path: 'grading', component: GradingComponent },
     {path: 'login', component: TeachersLoginComponent},
      {path: 'register', component: TeachersRegisterComponent}
   ]

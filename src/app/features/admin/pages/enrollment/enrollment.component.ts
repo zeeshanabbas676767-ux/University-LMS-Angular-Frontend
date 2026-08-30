@@ -18,7 +18,6 @@ import { Role } from '../../../../shared/models/role.model';
 export class AdminEnrollmentComponent implements OnInit {
 
   enrollments: Enrollment[] = [];
-
   enrollment = {
     id: 0,
     studentId: 0,
@@ -26,10 +25,13 @@ export class AdminEnrollmentComponent implements OnInit {
   };
   selectedStudentId = 0;
 selectedCourseId = 0;
+selectedDepartment = '';
 
 courses: Course[] = [];
   user: User[] = [];
-
+filteredUsers: User[] = [];
+filteredCourses: Course[] = [];
+uniqueDepartments: string[] = [];
   constructor(private enrollmentService: EnrollmentService,
      private courseService: CourseService, private authService: AuthService) {}
 
@@ -42,11 +44,20 @@ courses: Course[] = [];
  loadCourses() {
     this.courseService.getCourses().subscribe((data: any) => {
       this.courses = data;
+      this.filteredCourses = this.courses;
     });
   }
   loadUsers() {
+    
     this.authService.getAllUsers().subscribe((data: any) => {
-      this.user = data.filter((u: User) => u.roleId === 3); 
+       // Extract ALL unique departments from the raw database response first
+    const allDepartments = data.map((u: any) => u.department_Name).filter(Boolean);
+    this.uniqueDepartments = [...new Set(allDepartments)].sort() as string[];
+
+      this.user = data.filter((u: User) => u.roleId === 3);
+       this.filteredUsers = this.user; 
+     
+        //   this.uniqueSections = [...new Set(this.filteredUsers.map(d => d.section))].sort();
     });
   }
   loadEnrollments() {
@@ -59,6 +70,15 @@ courses: Course[] = [];
 //       this.loadEnrollments();
 //     });
 //   }
+
+filterStudents() {
+  this.filteredUsers = this.user.filter((u: User) =>
+    (!this.selectedDepartment || u.department_Name === this.selectedDepartment));
+  this.filteredCourses = this.courses.filter((c: Course) =>
+    (!this.selectedDepartment || c.teacher?.department_Name === this.selectedDepartment));
+}
+
+
 enrollStudent() {
   const payload = {
     studentId: Number(this.selectedStudentId),

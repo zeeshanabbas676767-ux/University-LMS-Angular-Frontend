@@ -13,6 +13,16 @@
     <!-- <h5>{{ isEditMode ? 'Edit Course' : 'Add Course' }}</h5> -->
 
     <div class="row">
+     <!-- Department Name -->
+      <div class="col-md-4">
+        <label>Department Name</label>
+        <select class="form-control" [(ngModel)]="selectedDepartment"  (change)="filterStudents()"> 
+          <option value="">Select Department</option>
+          <option *ngFor="let d of uniqueDepartments" [value]="d">
+            {{ d }}
+          </option>
+        </select>
+      </div>
 
       <div class="col-md-4">
         <label>Course Title</label>
@@ -28,7 +38,7 @@
         <label>Teacher</label>
          <select class="form-control" [(ngModel)]="selectedTeacherId"> 
           <option value="">Select Teacher</option>
-          <option *ngFor="let s of user" [value]="s.id">
+          <option *ngFor="let s of filteredUsers" [value]="s.id">
             {{ s.fullName  }} 
           </option> 
         </select>
@@ -53,6 +63,7 @@
     <table class="table table-dark">
       <thead>
         <tr>
+          <th>Department</th>
           <th>Title</th>
           <th>Description</th>  
           <th>Teacher</th>
@@ -62,6 +73,7 @@
 
       <tbody>
         <tr *ngFor="let c of courses">
+          <td>{{ c.teacher?.department_Name }}</td>
           <td>{{ c.title }}</td>
           <td>{{ c.description }}</td>
           <td>{{ c.teacher?.fullName }}</td>
